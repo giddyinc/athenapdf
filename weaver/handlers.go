@@ -66,6 +66,18 @@ func conversionHandler(c *gin.Context, source converter.ConversionSource) {
 		c.Query("s3_acl"),
 	}
 
+	// default is one
+	zoom := c.DefaultQuery("zoom", 1)
+	// .option("--no-portrait", "render in landscape")
+	orientation := c.Query("orientation", "portrait") // default to portrait
+
+	cmdParts := strings.Fields(conf.AthenaCMD)
+	cmdParts = append(cmdParts, fmt.Sprintf("%f", zoom))
+	if orientation == "landscape" {
+		cmdParts = append(cmdParts, "--no-portrait")
+	}
+	athenaCmd := strings.Join(cmdParts)
+
 	var conversion converter.Converter
 	var work converter.Work
 	attempts := 0
@@ -74,7 +86,7 @@ func conversionHandler(c *gin.Context, source converter.ConversionSource) {
 	uploadConversion := converter.UploadConversion{baseConversion, awsConf}
 
 StartConversion:
-	conversion = athenapdf.AthenaPDF{uploadConversion, conf.AthenaCMD, aggressive, waitForStatus}
+	conversion = athenapdf.AthenaPDF{uploadConversion, athenaCmd, aggressive, waitForStatus}
 	if attempts != 0 {
 		cc := cloudconvert.Client{
 			conf.CloudConvert.APIUrl,
