@@ -73,6 +73,8 @@ func conversionHandler(c *gin.Context, source converter.ConversionSource) {
 	orientation := c.DefaultQuery("orientation", "portrait") // default to portrait
 
 	cmdParts := strings.Fields(conf.AthenaCMD)
+	// add extra commands if applicable
+	cmdParts = append(cmdParts, "-Z")
 	cmdParts = append(cmdParts, zoom)
 	if orientation == "landscape" {
 		cmdParts = append(cmdParts, "--no-portrait")
