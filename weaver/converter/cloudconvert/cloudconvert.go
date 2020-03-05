@@ -220,10 +220,7 @@ func (c CloudConvert) Convert(s converter.ConversionSource, done <-chan struct{}
 		Timeout:      fmt.Sprintf("%.0f", c.Timeout.Seconds()),
 	}
 
-	u, err := uuid.NewV4()
-	if err != nil {
-		return nil, err
-	}
+	u := uuid.NewV4()
 
 	if c.AWSS3.S3Bucket == "" || c.AWSS3.S3Key == "" {
 		conv.Download = "inline"
