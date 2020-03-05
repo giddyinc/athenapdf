@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/arachnys/athenapdf/weaver/converter"
+	"github.com/giddyinc/athenapdf/weaver/converter"
 	"github.com/satori/go.uuid"
 	"io"
 	"io/ioutil"
@@ -220,7 +220,10 @@ func (c CloudConvert) Convert(s converter.ConversionSource, done <-chan struct{}
 		Timeout:      fmt.Sprintf("%.0f", c.Timeout.Seconds()),
 	}
 
-	u := uuid.NewV4()
+	u, err := uuid.NewV4()
+	if err != nil {
+		return nil, err
+	}
 
 	if c.AWSS3.S3Bucket == "" || c.AWSS3.S3Key == "" {
 		conv.Download = "inline"
