@@ -1,7 +1,7 @@
 package athenapdf
 
 import (
-	"github.com/arachnys/athenapdf/weaver/converter"
+	"github.com/giddyinc/athenapdf/weaver/converter"
 	"github.com/arachnys/athenapdf/weaver/gcmd"
 	"log"
 	"strings"

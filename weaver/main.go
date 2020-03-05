@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"github.com/DeanThompson/ginpprof"
-	"github.com/arachnys/athenapdf/weaver/converter"
+	"github.com/giddyinc/athenapdf/weaver/converter"
 	"github.com/getsentry/raven-go"
 	"github.com/gin-gonic/contrib/sentry"
 	"github.com/gin-gonic/gin"
