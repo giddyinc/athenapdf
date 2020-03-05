@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"strings"
 	"time"
 )
 
@@ -67,16 +68,16 @@ func conversionHandler(c *gin.Context, source converter.ConversionSource) {
 	}
 
 	// default is one
-	zoom := c.DefaultQuery("zoom", 1)
+	zoom := c.DefaultQuery("zoom", "1")
 	// .option("--no-portrait", "render in landscape")
-	orientation := c.Query("orientation", "portrait") // default to portrait
+	orientation := c.DefaultQuery("orientation", "portrait") // default to portrait
 
 	cmdParts := strings.Fields(conf.AthenaCMD)
-	cmdParts = append(cmdParts, fmt.Sprintf("%f", zoom))
+	cmdParts = append(cmdParts, zoom)
 	if orientation == "landscape" {
 		cmdParts = append(cmdParts, "--no-portrait")
 	}
-	athenaCmd := strings.Join(cmdParts)
+	athenaCmd := strings.Join(cmdParts, " ")
 
 	var conversion converter.Converter
 	var work converter.Work
