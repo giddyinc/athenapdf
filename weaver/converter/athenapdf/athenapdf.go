@@ -2,7 +2,7 @@ package athenapdf
 
 import (
 	"github.com/giddyinc/athenapdf/weaver/converter"
-	"github.com/arachnys/athenapdf/weaver/gcmd"
+	"github.com/giddyinc/athenapdf/weaver/gcmd"
 	"log"
 	"strings"
 )

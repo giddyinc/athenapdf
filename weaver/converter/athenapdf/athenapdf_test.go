@@ -2,7 +2,7 @@ package athenapdf
 
 import (
 	"github.com/giddyinc/athenapdf/weaver/converter"
-	"github.com/arachnys/athenapdf/weaver/testutil"
+	"github.com/giddyinc/athenapdf/weaver/testutil"
 	"io/ioutil"
 	"path/filepath"
 	"reflect"
